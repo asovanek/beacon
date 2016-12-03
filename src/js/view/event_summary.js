@@ -13,8 +13,20 @@ export default Marionette.View.extend({
 
     getAvailabilityClass: function () {
         const open = this.model.get("open");
+        if (open === 0) {
+            return "full";
+        }
 
-        return open === 0 ? "full" : open <= 20 ? "almost-full" : "available"
+        const experience = this.model.get('experience'),
+            eventMax = this.model.get('max'),
+            max = eventMax || experience.get('group').max;
+
+        if (max) {
+            let percentage = open / max * 100;
+            return percentage <= 25 ? "almost-full" : "available"
+        } else {
+            return open <= 5 ? "almost-full" : "available"
+        }
     },
 
     serializeData() {
@@ -24,7 +36,6 @@ export default Marionette.View.extend({
     },
 
     templateContext() {
-
         return {
             "availability": this.getAvailabilityClass()
         }
