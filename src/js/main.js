@@ -1,8 +1,9 @@
 import $ from "jquery";
 import App from "./app";
-import Config from "./config"
+import Url from "url"
 
 $(document).ready(() => {
-    window.app = new App(Config);
+    var request = Url.parse(window.location.href, true);
+    window.app = new App(request);
     app.start();
 });

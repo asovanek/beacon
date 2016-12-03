@@ -39,10 +39,8 @@ export default Backbone.Model.extend({
         }
 
         if (response.hasOwnProperty('experience')) {
-            console.log(response.experience);
             var experiences = CollectionPool.getCollection('experiences');
             response.experience = experiences.getModel(response.experience.id);
-            console.log(response.experience);
         }
 
         return response;

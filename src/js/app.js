@@ -14,21 +14,45 @@ export default Marionette.Application.extend({
     baseUrl: null,
     seller: {},
 
-    initialize: function(options) {
+    initialize: function(request) {
+        var get = request.query;
+
+        this.initializeEnvironment(get.env, {
+            baseUrl: get.baseUrl,
+            seller: get.seller,
+            apiKey: get.apiKey // TODO: Remove after switching to availability
+        });
+    },
+
+    initializeEnvironment(env, options) {
+        // Initialize baseUrl
+        switch (env) {
+            case 'sandbox':
+                this.baseUrl = 'https://sandbox.xola.com';
+                break;
+
+            case 'dev':
+                this.baseUrl = options.baseUrl;
+                break;
+
+            default:
+                this.baseUrl = 'https://xola.com';
+        }
+
+        // Initialize ajax
+        var app = this;
         var headers = $.ajaxSetup().headers || {};
-        headers['X-API-KEY'] = options.sellerApiKey;
+        headers['X-API-KEY'] = options.apiKey;
         $.ajaxSetup({
             headers: headers,
             beforeSend: function (jqXHR, settings) {
-                settings.url = options.baseUrl + settings.url;
+                settings.url = app.baseUrl + settings.url;
                 settings.crossDomain = true;
             }
         });
 
-        this.baseUrl = options.baseUrl;
-
-        this.seller = new Seller({id:options.sellerId});
-        this.seller.fetch();
+        // Initialize seller
+        this.seller = new Seller({id: options.seller});
     },
 
     onStart() {
@@ -36,6 +60,8 @@ export default Marionette.Application.extend({
         this.setUpCollectionPool();
         this.routers = [new AppRouter()];
         Backbone.history.start();
+
+        this.seller.fetch();
     },
 
     setUpCollectionPool: function() {
