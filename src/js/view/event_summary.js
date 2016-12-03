@@ -16,7 +16,7 @@ export default Marionette.View.extend({
 
     serializeData() {
         var data = this.model.toJSON();
-        data.start = this.model.get("start").format("LT");
+        data.start = this.model.get("start").format("hh:mm A");
         return data;
     },
 
