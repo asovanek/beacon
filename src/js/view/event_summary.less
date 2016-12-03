@@ -3,10 +3,24 @@
   padding: 15px 10px;
   line-height: 1.4;
 
+  &:nth-child(even) {
+    background-color: #eee;
+  }
+
   td {
     padding: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+
+  .availability {
+    text-align: center;
+
+    .available-text {
+      font-size: 0.6em;
+    }
+  }
+
+
 }
