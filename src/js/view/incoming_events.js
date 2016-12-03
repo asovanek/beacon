@@ -5,7 +5,6 @@ import moment from "moment";
 const THIRTY_SECONDS = 30000;
 
 export default Marionette.CollectionView.extend({
-    tagName: 'table',
     childView: EventSummaryView,
 
     fetchData: function () {

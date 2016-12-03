@@ -2,18 +2,22 @@
   font-size: 50px;
   padding: 15px 10px;
   line-height: 1.4;
+  display: flex;
 
   &:nth-child(even) {
     background-color: #eee;
   }
 
-  td {
+  > div {
     padding: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
+  .experience {
+    flex-grow: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .availability {
     text-align: center;
 
