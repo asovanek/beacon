@@ -26,7 +26,7 @@ export default Marionette.View.extend({
         var view = this;
         setInterval(function(){
             view.updateTime.call(view)
-        }, 500);
+        }, 999);
     },
 
     updateTime: function () {
