@@ -1,14 +1,20 @@
 import Marionette from "backbone.marionette";
+import TimerView from './timer';
+import Timer from '../model/timer'
 
 /**
  * @param Seller model
  */
 export default Marionette.View.extend({
-    initialize: function() {
-        this.listenTo(this.model, 'change', this.render);
+    modelEvents: {
+        'change': 'render'
     },
 
-    serializeData: function () {
+    regions: {
+      time: '.time'
+    },
+
+    serializeData() {
         var data = this.model.toJSON();
 
         if (this.model.get('picture')) {
@@ -22,15 +28,7 @@ export default Marionette.View.extend({
         return data;
     },
 
-    onRender: function () {
-        var view = this;
-        setInterval(function(){
-            view.updateTime.call(view)
-        }, 999);
-    },
-
-    updateTime: function () {
-        var now = new Date();
-        this.$el.find(".time").html(now.toLocaleTimeString());
+    onRender() {
+        this.showChildView("time", new TimerView({model: new Timer()}));
     }
 });
