@@ -1,15 +1,30 @@
+@import "../../styles/index";
+
 .event-summary {
   font-size: 50px;
   padding: 15px 10px;
   line-height: 1.4;
   display: flex;
+  align-items: center;
 
   &:nth-child(even) {
-    background-color: #eee;
+    background-color: @background-gray;
   }
 
   > div {
-    padding: 10px;
+    padding: 10px 25px;
+  }
+
+  .available {
+    color: @green;
+  }
+
+  .full {
+    color: @red;
+  }
+
+  .almost-full {
+    color: @orange;
   }
 
   .experience {
@@ -18,11 +33,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .availability {
     text-align: center;
+    font-size: 1.4em;
 
     .available-text {
-      font-size: 0.6em;
+      font-size: 0.4em;
     }
   }
 
