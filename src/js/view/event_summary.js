@@ -1,8 +1,10 @@
 import Marionette from "backbone.marionette";
+import ExperienceNameView from "./experience_name";
 import ExperiencePriceView from "./experience_price";
 
 export default Marionette.View.extend({
     regions: {
+        experience: ".experience",
         price: ".price"
     },
 
@@ -26,6 +28,7 @@ export default Marionette.View.extend({
     },
 
     onRender() {
+        this.showChildView("experience", new ExperienceNameView({model: this.model.get('experience')}));
         this.showChildView("price", new ExperiencePriceView({model: this.model.get('experience')}));
     }
 });

@@ -2,7 +2,7 @@ import Marionette from "backbone.marionette";
 import EventSummaryView from "./event_summary";
 import moment from "moment";
 
-const THIRTY_SECONDS = 30000;
+const REFRESH_INTERVAL = 60000;
 
 export default Marionette.CollectionView.extend({
     childView: EventSummaryView,
@@ -23,7 +23,7 @@ export default Marionette.CollectionView.extend({
 
     refresh: function() {
         var fetchData = this.fetchData.bind(this);
-        setInterval(fetchData, THIRTY_SECONDS);
+        setInterval(fetchData, REFRESH_INTERVAL);
     },
 
     initialize: function(options) {

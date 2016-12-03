@@ -19,12 +19,14 @@ export default EventCollection.extend({
         $.each(response, function (experienceId, dates) {
             $.each(dates, function (date, times) {
                 $.each(times, function (time, open) {
+                    var experience = CollectionPool.getCollection('experiences').getModel(experienceId);
+
                     var event = new Event({
                         open: open,
                         max: open,
                         start: moment(date + ('0000' + time).slice(-4), 'YYYY-MM-DDHHmm'),
-                        experience: CollectionPool.getCollection('experiences').getModel(experienceId),
-                        title: 'Nema', //app.findModel(experienceId, 'experiences', {}, false, false).get('name'),
+                        experience: experience,
+                        title: experience.get("name"), //'Nema', //app.findModel(experienceId, 'experiences', {}, false, false).get('name'),
                         quantity: {
                             reserved: 0
                         }

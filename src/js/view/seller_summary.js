@@ -15,9 +15,7 @@ export default Marionette.View.extend({
             data.coverUrl = app.getAbsoluteUrl(this.model.get('picture').src);
         }
 
-        if (this.model.get('logo')) {
-            data.logoUrl = app.getAbsoluteUrl(this.model.get('logo').src);
-        }
+        data.logoUrl = app.getAbsoluteUrl('/images/logos/logo-medium.png');
 
         return data;
     },

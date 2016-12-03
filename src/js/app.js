@@ -21,7 +21,6 @@ export default Marionette.Application.extend({
         this.initializeEnvironment(get.env, {
             baseUrl: get.baseUrl,
             seller: get.seller,
-            apiKey: get.apiKey // TODO: Remove after switching to availability
         });
     },
 
@@ -42,10 +41,7 @@ export default Marionette.Application.extend({
 
         // Initialize ajax
         var app = this;
-        var headers = $.ajaxSetup().headers || {};
-        headers['X-API-KEY'] = options.apiKey;
         $.ajaxSetup({
-            headers: headers,
             beforeSend: function (jqXHR, settings) {
                 settings.url = app.baseUrl + settings.url;
                 settings.crossDomain = true;
