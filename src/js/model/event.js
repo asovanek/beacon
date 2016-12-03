@@ -1,4 +1,5 @@
 import Backbone from "backbone";
+import Experience from "./experience";
 
 export default Backbone.Model.extend({
     urlRoot: '/api/events',
@@ -7,9 +8,9 @@ export default Backbone.Model.extend({
         return this.urlRoot + '/' + this.id;
     },
 
-    parse: function (resp, options) {
-        if (!resp) {
-            return resp;
+    parse: function (response, options) {
+        if (!response) {
+            return response;
         }
 
         options = options || {};
@@ -17,28 +18,31 @@ export default Backbone.Model.extend({
             options.timezoneOffset = true;
         }
 
-        if (resp.hasOwnProperty('start')) {
-            resp.start = new Date(resp.start);
-
-            console.log(resp.start.getTime());
+        if (response.hasOwnProperty('start')) {
+            response.start = new Date(response.start);
 
             if (options.timezoneOffset) {
                 // Offset the date by the current timezone since the date is in UTC
-                resp.start.setMinutes(resp.start.getMinutes() + resp.start.getTimezoneOffset());
+                response.start.setMinutes(response.start.getMinutes() + response.start.getTimezoneOffset());
             }
 
-            resp.start = resp.start.toLocaleTimeString();
+            response.start = response.start.toLocaleTimeString();
         }
 
-        if (resp.hasOwnProperty('end')) {
-            resp.end = new Date(resp.end);
+        if (response.hasOwnProperty('end')) {
+            response.end = new Date(response.end);
 
             if (options.timezoneOffset) {
                 // Offset the date by the current timezone since the date is in UTC
-                resp.end.setMinutes(resp.end.getMinutes() + resp.end.getTimezoneOffset());
+                response.end.setMinutes(response.end.getMinutes() + response.end.getTimezoneOffset());
             }
         }
 
-        return resp;
+        if (response.hasOwnProperty('experience')) {
+            response.experience = new Experience(response.experience);
+            response.experience.fetch();
+        }
+
+        return response;
     }
 });
