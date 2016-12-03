@@ -1,4 +1,4 @@
-import * as Backbone from "backbone";
+import Backbone from "backbone";
 
 export default Backbone.Model.extend({
     urlRoot: '/api/sellers',
