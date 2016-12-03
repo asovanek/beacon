@@ -8,8 +8,14 @@ import CollectionPool from "../collection_pool";
  */
 export default Marionette.View.extend({
     regions: {
-        sellerSummary: ".seller-summary",
-        incomingEvents: ".incoming-events"
+        sellerSummary: {
+            el: ".seller-summary",
+            replaceElement: true
+        },
+        incomingEvents: {
+            el: ".incoming-events",
+            replaceElement: true
+        }
     },
 
     onRender: function () {
