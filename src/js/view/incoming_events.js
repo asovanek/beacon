@@ -14,7 +14,7 @@ export default Marionette.CollectionView.extend({
             data: {
                 seller: this.filters.seller.get("id"),
                 start: now.unix(),
-                end: now.clone().add('days', 1).unix(),
+                end: now.clone().add(1, 'days').unix(),
                 offset: new Date(now).getTimezoneOffset() * 60
             }
         });
