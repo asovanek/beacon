@@ -1,0 +1,46 @@
+.seller-summary {
+    position: relative;
+
+    .background {
+        position: absolute;
+
+        background-position-y: center;
+        background-size: cover;
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+
+        width: 100%;
+        height: 150px;
+
+        z-index: 0;
+    }
+    .details {
+        color: white;
+
+        font-size: 18pt;
+        text-align: center;
+
+        position: relative;
+        z-index: 1;
+    }
+    .time {
+        float: left;
+        text-align: left;
+        width: 30%;
+    }
+    .logo {
+        float: left;
+        width: 40%;
+    }
+    .logo img {
+        max-width: 150px;
+    }
+    .name {
+        float: left;
+        text-align: right;
+        width: 30%;
+    }
+}
