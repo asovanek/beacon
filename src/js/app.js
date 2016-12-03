@@ -6,6 +6,7 @@ import Seller from "./model/seller";
 import CollectionPool from "./collection_pool";
 import Events from "./collections/events";
 import Experiences from "./collections/experiences";
+import Availability from "./collections/availability";
 
 export default Marionette.Application.extend({
     region: "#app",
@@ -66,6 +67,7 @@ export default Marionette.Application.extend({
 
     setUpCollectionPool: function() {
         CollectionPool.setCollection('events', new Events());
+        CollectionPool.setCollection('availability', new Availability());
         CollectionPool.setCollection('experiences', new Experiences());
     },
 

@@ -12,6 +12,12 @@ export default Marionette.View.extend({
         return open === 0 ? "full" : open <= 20 ? "almost-full" : "available"
     },
 
+    serializeData() {
+        var data = this.model.toJSON();
+        data.start = this.model.get("start").format("LT");
+        return data;
+    },
+
     templateContext() {
 
         return {

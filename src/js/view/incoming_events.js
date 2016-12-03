@@ -8,14 +8,15 @@ export default Marionette.CollectionView.extend({
     childView: EventSummaryView,
 
     fetchData: function () {
-        var now = moment("2016-12-30");
+        var now = moment();
 
         this.collection.fetch({
             data: {
                 seller: this.filters.seller.get("id"),
-                start: now.unix(),
-                end: now.clone().add(1, 'days').unix(),
-                offset: new Date(now).getTimezoneOffset() * 60
+                start: now.format('YYYY-MM-DD'),
+                end: now.format('YYYY-MM-DD'), //now.clone().add(1, 'days').unix(),
+                ignoreCutoff: true,
+                // offset: new Date(now).getTimezoneOffset() * 60
             }
         });
     },

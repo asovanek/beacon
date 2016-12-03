@@ -22,7 +22,7 @@ export default Marionette.View.extend({
         this.showChildView('sellerSummary', new SellerSummaryView({model: app.seller}));
 
         this.showChildView('incomingEvents', new IncomingEventsView({
-            collection: CollectionPool.getCollection('events'),
+            collection: CollectionPool.getCollection('availability'),
             filters: {seller: app.seller}
         }));
     }
