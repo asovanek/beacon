@@ -4,7 +4,10 @@ import ExperiencePriceView from "./experience_price";
 
 export default Marionette.View.extend({
     regions: {
-        experience: ".experience",
+        experience: {
+            el: ".experience",
+            replaceElement: true
+        },
         price: ".price"
     },
 
