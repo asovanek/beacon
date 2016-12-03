@@ -8,6 +8,16 @@ export default Backbone.Model.extend({
         return this.urlRoot + '/' + this.id;
     },
 
+    /**
+     * Return's true if the event is an all-day event
+     *
+     * @returns {boolean}
+     */
+    isAllDay: function() {
+        var time = this.get('start').format('HHmm');
+        return (time === '0000');
+    },
+
     parse: function (response, options) {
         if (!response) {
             return response;
