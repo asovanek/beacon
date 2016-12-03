@@ -2,7 +2,7 @@ import Marionette from "backbone.marionette";
 import EventSummaryView from "./event_summary";
 import moment from "moment";
 
-const THIRTY_SECONDS = 29999;
+const THIRTY_SECONDS = 5555;
 
 export default Marionette.CollectionView.extend({
     childView: EventSummaryView,

@@ -3,6 +3,9 @@ import Backbone from "backbone";
 import Marionette from "backbone.marionette";
 import AppRouter from "./controller/app_router";
 import Seller from "./model/seller";
+import CollectionPool from "./collection_pool";
+import Events from "./collections/events";
+import Experiences from "./collections/experiences";
 
 export default Marionette.Application.extend({
     region: "#app",
@@ -30,8 +33,14 @@ export default Marionette.Application.extend({
 
     onStart() {
         this.setUpNunjucks();
+        this.setUpCollectionPool();
         this.routers = [new AppRouter()];
         Backbone.history.start();
+    },
+
+    setUpCollectionPool: function() {
+        CollectionPool.setCollection('events', new Events());
+        CollectionPool.setCollection('experiences', new Experiences());
     },
 
     setUpNunjucks() {

@@ -1,4 +1,4 @@
-import EventCollection from "./events";
+import EventCollection from "../collections/events";
 
 /**
  * Generates an EventCollection out of the availability endpoint

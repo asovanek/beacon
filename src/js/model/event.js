@@ -1,5 +1,5 @@
 import Backbone from "backbone";
-import Experience from "./experience";
+import CollectionPool from "../collection_pool";
 
 export default Backbone.Model.extend({
     urlRoot: '/api/events',
@@ -39,8 +39,10 @@ export default Backbone.Model.extend({
         }
 
         if (response.hasOwnProperty('experience')) {
-            response.experience = new Experience(response.experience);
-            response.experience.fetch();
+            console.log(response.experience);
+            var experiences = CollectionPool.getCollection('experiences');
+            response.experience = experiences.getModel(response.experience.id);
+            console.log(response.experience);
         }
 
         return response;
