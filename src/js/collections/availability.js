@@ -23,6 +23,7 @@ export default EventCollection.extend({
                     var experience = CollectionPool.getCollection('experiences').getModel(experienceId);
 
                     var event = new Event({
+                        id: date + ':' + time + '-' + experienceId,
                         open: open,
                         max: open,
                         start: moment(date + ('0000' + time).slice(-4), 'YYYY-MM-DDHHmm'),
@@ -49,7 +50,7 @@ export default EventCollection.extend({
      * @returns {number}
      */
     comparator: function(model1, model2) {
-        if (!model1.has('start') || !model2.has('start')) {
+        if (!model1.get('start') || !model2.get('start')) {
             return 1;
         }
 
