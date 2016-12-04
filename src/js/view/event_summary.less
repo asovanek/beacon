@@ -1,7 +1,6 @@
 @import "../../styles/index";
 
 .event-summary {
-  font-size: 50px;
   padding: 15px 10px;
   line-height: 1.4;
   display: flex;
@@ -11,8 +10,13 @@
     background-color: @background-gray;
   }
 
+  .time {
+    .nowrap;
+  }
+
   > div {
     padding: 10px 25px;
+    flex-grow: 2;
   }
 
   .available {
@@ -28,9 +32,22 @@
   }
 
   .experience {
-    flex-grow: 2;
-    .ellipsis;
+    flex-grow: 4;
+    line-height: 1;
+
+    .experience-name {
+      font-family: @font-maven;
+      .ellipsis;
+    }
+
+    .event-duration {
+      font-size: 0.6em;
+      font-weight: 100;
+      color: @gray;
+    }
   }
+
+
 
   .availability {
     font-size: 1.4em;

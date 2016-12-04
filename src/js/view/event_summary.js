@@ -1,5 +1,5 @@
 import Marionette from "backbone.marionette";
-import ExperienceNameView from "./experience_name";
+import ExperienceView from "./experience";
 import ExperiencePriceView from "./experience_price";
 // import Scheduler from "node-schedule";
 
@@ -9,10 +9,22 @@ export default Marionette.View.extend({
         price: ".price"
     },
 
-    getAvailabilityClass: function () {
+    getAvailabilityClass() {
         const open = this.model.get("open");
+        if (open === 0) {
+            return "full";
+        }
 
-        return open === 0 ? "full" : open <= 20 ? "almost-full" : "available"
+        const experience = this.model.get('experience'),
+            eventMax = this.model.get('max'),
+            max = eventMax || experience.get('group').max;
+
+        if (max) {
+            let percentage = open / max * 100;
+            return percentage <= 25 ? "almost-full" : "available"
+        } else {
+            return open <= 5 ? "almost-full" : "available"
+        }
     },
 
     serializeData() {
@@ -22,14 +34,13 @@ export default Marionette.View.extend({
     },
 
     templateContext() {
-
         return {
             "availability": this.getAvailabilityClass()
         }
     },
 
     onRender() {
-        this.showChildView("experience", new ExperienceNameView({model: this.model.get('experience')}));
+        this.showChildView("experience", new ExperienceView({model: this.model.get('experience')}));
         this.showChildView("price", new ExperiencePriceView({model: this.model.get('experience')}));
 
         // var date = new Date();
