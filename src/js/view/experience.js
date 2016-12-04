@@ -6,7 +6,6 @@ import 'moment-duration-format';
  * @param {model} Experience
  */
 export default Marionette.View.extend({
-    className: 'experience',
     modelEvents: {
         "change:duration": "render",
         "change:name": "render"
@@ -17,7 +16,7 @@ export default Marionette.View.extend({
         window.moment = moment;
 
         return {
-            duration: moment.duration(duration, 'minutes').format('hh[hr] mm[min]')
+            duration: moment.duration(duration, 'minutes').format('h[hr] m[min]')
         }
     }
 });

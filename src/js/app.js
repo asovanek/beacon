@@ -21,6 +21,7 @@ export default Marionette.Application.extend({
         this.initializeEnvironment(get.env, {
             baseUrl: get.baseUrl,
             seller: get.seller,
+            customStylesheet: get.style
         });
     },
 
@@ -50,6 +51,10 @@ export default Marionette.Application.extend({
 
         // Initialize seller
         this.seller = new Seller({id: options.seller});
+
+        if (options.customStylesheet) {
+            $('head').append('<link rel="stylesheet" type="text/css" href="' + options.customStylesheet + '">');
+        }
     },
 
     onStart() {

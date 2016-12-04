@@ -18,10 +18,10 @@ export default Marionette.View.extend({
         var data = this.model.toJSON();
 
         if (this.model.get('picture')) {
-            data.coverUrl = app.getAbsoluteUrl(this.model.get('picture').src);
+            //data.coverUrl = app.getAbsoluteUrl(this.model.get('picture').src);
         }
 
-        data.logoUrl = app.getAbsoluteUrl('/images/logos/logo-medium.png');
+        data.logoUrl = app.getAbsoluteUrl();
 
         return data;
     },

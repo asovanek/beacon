@@ -4,6 +4,7 @@ import ExperiencePriceView from "./experience_price";
 // import Scheduler from "node-schedule";
 
 export default Marionette.View.extend({
+    tagName: 'tr',
     regions: {
         experience: ".experience",
         price: ".price"
@@ -29,7 +30,7 @@ export default Marionette.View.extend({
 
     serializeData() {
         var data = this.model.toJSON();
-        data.start = this.model.get("start").format("hh:mm A");
+        data.start = this.model.get("start").format("LT");
         return data;
     },
 

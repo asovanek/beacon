@@ -11,7 +11,7 @@ export default Marionette.View.extend({
             formattedPrice;
 
         if (price && currency) {
-            formattedPrice = price.toLocaleString('en', {style: 'currency', currency: currency});
+            formattedPrice = price.toLocaleString('en', {style: 'currency', currency: currency}).split('.')[0];
         }
         return {
             formattedPrice: formattedPrice

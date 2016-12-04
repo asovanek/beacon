@@ -1,8 +1,9 @@
 @import "../../styles/index";
 
 .seller-summary {
+    background-color: @xola-blue;
     position: relative;
-    height: 200px;
+    height: 120px;
 
     .background {
         position: absolute;
@@ -23,16 +24,24 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 0 32px;
 
         > div {
             width: 33%;
         }
     }
-    .logo img {
-        max-width: 150px;
+    .time {
+        text-align: left;
+        font-weight: bold;
+    }
+    .logo {
+        background: url("https://xola.com/images/logos/logo-medium.png") no-repeat center center;
+        background-size: auto 80px;
+        height: 80px;
     }
     .name {
         font-family: @font-maven;
-        font-size: 0.8em;
+        font-size: 0.6em;
+        text-align: right;
     }
 }

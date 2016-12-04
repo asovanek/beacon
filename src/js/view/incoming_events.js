@@ -3,9 +3,10 @@ import EventSummaryView from "./event_summary";
 import moment from "moment";
 import Scheduler from "node-schedule";
 
-const REFRESH_INTERVAL = 10000;
+const REFRESH_INTERVAL = 300000;
 
 export default Marionette.CollectionView.extend({
+    tagName: 'table',
     childView: EventSummaryView,
 
     fetchData: function () {
