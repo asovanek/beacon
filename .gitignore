@@ -1,3 +1,11 @@
-.idea/
-dist
+# Ignore OS metadata
+.DS_Store
+
+# Ignore IDE metadata
+.idea
+
+# Ignore everything in dist folder
+dist/*
+
+# Ignore node modules
 node_modules
