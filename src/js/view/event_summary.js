@@ -1,17 +1,14 @@
 import Marionette from "backbone.marionette";
-import ExperienceNameView from "./experience_name";
+import ExperienceView from "./experience";
 import ExperiencePriceView from "./experience_price";
 
 export default Marionette.View.extend({
     regions: {
-        experience: {
-            el: ".experience",
-            replaceElement: true
-        },
+        experience: ".experience",
         price: ".price"
     },
 
-    getAvailabilityClass: function () {
+    getAvailabilityClass() {
         const open = this.model.get("open");
         if (open === 0) {
             return "full";
@@ -42,7 +39,7 @@ export default Marionette.View.extend({
     },
 
     onRender() {
-        this.showChildView("experience", new ExperienceNameView({model: this.model.get('experience')}));
+        this.showChildView("experience", new ExperienceView({model: this.model.get('experience')}));
         this.showChildView("price", new ExperiencePriceView({model: this.model.get('experience')}));
     }
 });
