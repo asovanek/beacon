@@ -1,8 +1,8 @@
 {
-  "name": "skeleton-js-app",
+  "name": "beacon",
   "version": "0.1.0",
-  "description": "Xola app store",
-  "author": "Xola",
+  "description": "Event information display system for Xola clients",
+  "author": "Igor Stojadinovic <mightytroll@gmail.com>",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && webpack-dev-server --content-base dist/",

@@ -11,7 +11,7 @@ export default Marionette.View.extend({
     },
 
     regions: {
-      time: '.time'
+        time: '.time'
     },
 
     serializeData() {

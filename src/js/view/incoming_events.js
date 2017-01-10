@@ -16,8 +16,7 @@ export default Marionette.CollectionView.extend({
             data: {
                 seller: this.filters.seller.get("id"),
                 start: now.format('YYYY-MM-DD'),
-                end: now.format('YYYY-MM-DD'),
-                ignoreCutoff: true,
+                end: now.format('YYYY-MM-DD')
             }
         });
     },
