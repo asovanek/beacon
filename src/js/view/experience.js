@@ -7,8 +7,8 @@ import 'moment-duration-format';
  */
 export default Marionette.View.extend({
     modelEvents: {
-        "change:duration": "render",
-        "change:name": "render"
+        'change:duration': 'render',
+        'change:name': 'render',
     },
 
     templateContext() {

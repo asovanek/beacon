@@ -18,6 +18,15 @@ export default Backbone.Model.extend({
             //     console.log('The world is going to end today.');
             // });
         }
+
+        this.listenTo(this.get('experience'), 'change:cutoff', this.onCutoff);
+    },
+
+    onCutoff: function (experience) {
+        var startTime = this.get('start');
+        var cutoff = experience.get('cutoff');
+
+        this.set('bookingDeadline', startTime.subtract(cutoff, 'm'));
     },
 
     /**
