@@ -37,7 +37,6 @@ export default Marionette.CollectionView.extend({
         this.refresh();
     },
     onAdd: function (event) {
-        // this.listenTo(event.get('experience'), 'change:cutoff', this.onCutoff);
         this.listenTo(event, 'change:bookingDeadline', this.onBookingDeadlineChange);
 
         var date = event.get('start').toDate();
@@ -53,12 +52,14 @@ export default Marionette.CollectionView.extend({
             event.job = null;
         }
 
-        // this.stopListening(event.get('experience'), 'change:cutoff', this.onCutoff());
+        this.stopListening(event, 'change:bookingDeadline', this.onBookingDeadlineChange);
     },
-    // onCutoff: function (experience) {
-    //     console.log(experience.get('cutoff'));
-    // },
     onBookingDeadlineChange: function (event) {
         console.log(event.get('bookingDeadline'));
+
+        var now = moment();
+        if (!event.isAllDay() && event.get('bookingDeadline').isBefore(now)) {
+            this.collection.remove(event);
+        }
     },
 });
