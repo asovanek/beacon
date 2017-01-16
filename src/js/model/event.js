@@ -10,23 +10,21 @@ export default Backbone.Model.extend({
     },
 
     initialize: function () {
-        if (this.get("start")) {
-            var date = this.get("start").toDate();
-            // console.log(date);
-
-            // var job = Scheduler.scheduleJob(date, function(){
-            //     console.log('The world is going to end today.');
-            // });
-        }
-
-        this.listenTo(this.get('experience'), 'change:cutoff', this.onCutoff);
+        this.listenTo(this.get('experience'), 'change:cutoff', this.updateBookingDeadline);
+        this.listenTo(this, 'change:start', this.updateBookingDeadline);
     },
 
-    onCutoff: function (experience) {
+    updateBookingDeadline: function (experience) {
         var startTime = this.get('start');
         var cutoff = experience.get('cutoff');
 
-        this.set('bookingDeadline', startTime.subtract(cutoff, 'm'));
+        var bookingDeadline = startTime.clone();
+
+        if (cutoff) {
+            bookingDeadline.subtract(cutoff, 'm');
+        }
+
+        this.set('bookingDeadline', bookingDeadline);
     },
 
     /**
@@ -51,22 +49,10 @@ export default Backbone.Model.extend({
 
         if (response.hasOwnProperty('start')) {
             response.start = moment(response.start);
-
-            // if (options.timezoneOffset) {
-            //     // Offset the date by the current timezone since the date is in UTC
-            //     response.start.setMinutes(response.start.getMinutes() + response.start.getTimezoneOffset());
-            // }
-            //
-            // response.start = response.start.toLocaleTimeString();
         }
 
         if (response.hasOwnProperty('end')) {
             response.end = moment(response.end);
-
-            // if (options.timezoneOffset) {
-            //     // Offset the date by the current timezone since the date is in UTC
-            //     response.end.setMinutes(response.end.getMinutes() + response.end.getTimezoneOffset());
-            // }
         }
 
         if (response.hasOwnProperty('experience')) {
@@ -75,18 +61,5 @@ export default Backbone.Model.extend({
         }
 
         return response;
-    },
-
-    // scheduleExpirationxpiration() {
-    //     var date = this.get("start").toDate();
-    //     console.log(date);
-    //
-    //     // var job = Scheduler.scheduleJob(date, function(){
-    //     //     console.log('The world is going to end today.');
-    //     // });
-    // },
-    //
-    // cancelScheduledJob() {
-    //
-    // }
+    }
 });

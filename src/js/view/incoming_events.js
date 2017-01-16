@@ -3,7 +3,7 @@ import EventSummaryView from "./event_summary";
 import moment from "moment";
 import Scheduler from "node-schedule";
 
-const REFRESH_INTERVAL = 30000;
+const REFRESH_INTERVAL = 20000;
 
 export default Marionette.CollectionView.extend({
     tagName: 'table',
@@ -40,7 +40,6 @@ export default Marionette.CollectionView.extend({
         this.listenTo(event, 'change:bookingDeadline', this.onBookingDeadlineChange);
 
         var date = event.get('start').toDate();
-        // var date = event.get('bookingDeadline').toDate();
         var collection = this.collection;
         event.job = Scheduler.scheduleJob(date, function(){
             collection.remove(event);
@@ -55,10 +54,8 @@ export default Marionette.CollectionView.extend({
         this.stopListening(event, 'change:bookingDeadline', this.onBookingDeadlineChange);
     },
     onBookingDeadlineChange: function (event) {
-        console.log(event.get('bookingDeadline'));
-
         var now = moment();
-        if (!event.isAllDay() && event.get('bookingDeadline').isBefore(now)) {
+        if (event.isAllDay() || event.get('bookingDeadline').isBefore(now)) {
             this.collection.remove(event);
         }
     },

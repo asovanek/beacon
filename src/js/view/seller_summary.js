@@ -17,10 +17,6 @@ export default Marionette.View.extend({
     serializeData() {
         var data = this.model.toJSON();
 
-        if (this.model.get('picture')) {
-            //data.coverUrl = app.getAbsoluteUrl(this.model.get('picture').src);
-        }
-
         data.logoUrl = app.getAbsoluteUrl();
 
         return data;

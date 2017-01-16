@@ -21,19 +21,26 @@ export default EventCollection.extend({
             $.each(dates, function (date, times) {
                 $.each(times, function (time, open) {
                     var experience = CollectionPool.getCollection('experiences').getModel(experienceId);
+                    var cutoff = experience.get('cutoff');
+                    var start = moment(date + ('0000' + time).slice(-4), 'YYYY-MM-DDHHmm');
+                    var bookingDeadline = start.clone();
+                    if (cutoff) {
+                        bookingDeadline.subtract(cutoff, 'm');
+                    }
 
                     var event = new Event({
                         id: date + ':' + time + '-' + experienceId,
                         open: open,
                         max: open,
-                        start: moment(date + ('0000' + time).slice(-4), 'YYYY-MM-DDHHmm'),
+                        start: start,
+                        bookingDeadline: bookingDeadline,
                         experience: experience,
                         quantity: {
                             reserved: 0
                         }
                     });
 
-                    if (!event.isAllDay() && event.get('start').isAfter(now)) {
+                    if (!event.isAllDay() && event.get('bookingDeadline').isAfter(now)) {
                         events.push(event);
                     }
                 });
