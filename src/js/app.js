@@ -7,6 +7,7 @@ import CollectionPool from "./collection_pool";
 import Events from "./collections/events";
 import Experiences from "./collections/experiences";
 import Availability from "./collections/availability";
+import Pusher from "pusher-js";
 
 export default Marionette.Application.extend({
     region: "#app",
@@ -14,6 +15,7 @@ export default Marionette.Application.extend({
 
     baseUrl: null,
     seller: {},
+    pusher:null,
 
     initialize: function(request) {
         var get = request.query;
@@ -33,7 +35,7 @@ export default Marionette.Application.extend({
                 break;
 
             case 'dev':
-                this.baseUrl = options.baseUrl;
+                this.baseUrl = 'http://xola.local';
                 break;
 
             default:
@@ -60,10 +62,22 @@ export default Marionette.Application.extend({
     onStart() {
         this.setUpNunjucks();
         this.setUpCollectionPool();
+        this.setUpPusher();
         this.routers = [new AppRouter()];
         Backbone.history.start();
-
         this.seller.fetch();
+    },
+
+    setUpPusher: function(pusherKey='5c611bf960069c63c91d', xolaApiKey='s6YqQ_IByNsv6HygkmAU02HOtaIl-rqCtXQHp-OY2ew') {
+        this.pusher = new Pusher(pusherKey, {
+            authEndpoint: this.baseUrl + "/api/pusher/auth",
+            encrypted: true,
+            auth: {
+                headers: {
+                    'X-API-KEY': xolaApiKey
+                }
+            }
+        });
     },
 
     setUpCollectionPool: function() {
